@@ -13,9 +13,8 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
-  Button,
-  Typography,
   makeStyles,
+  fade,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
@@ -24,6 +23,8 @@ import VPNKeyIcon from '@material-ui/icons/VpnKey';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import UploadIcon from '@material-ui/icons/NoteAdd';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +33,36 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
   },
 }));
 
@@ -48,7 +79,6 @@ const Nav = ({history}) => {
     const checkUser = async () => {
       try {
         const userdata = await checkToken(localStorage.getItem('token'));
-        console.log(userdata);
         setUser(userdata);
       } catch (e) {
         history.push('/home');
@@ -60,7 +90,7 @@ const Nav = ({history}) => {
 
   return (
     <>
-      <AppBar style={{ background: 'black' }}>
+      <AppBar style={{background: 'black'}}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -77,13 +107,26 @@ const Nav = ({history}) => {
             to="/home"
           >
             <ListItemIcon>
-              <img src="http://users.metropolia.fi/~eelik/instaham/instahamlogo.png" alt="logo"/>
+              <img src="http://users.metropolia.fi/~eelik/instaham/instahamlogo.png"
+                   alt="logo"/>
             </ListItemIcon>
           </ListItem>
-
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon/>
+            </div>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{'aria-label': 'search'}}
+            />
+          </div>
         </Toolbar>
       </AppBar>
-      <Drawer open={open} onClose={toggleDrawer(false) }>
+      <Drawer open={open} onClose={toggleDrawer(false)}>
         <List>
           {user === null &&
           <ListItem

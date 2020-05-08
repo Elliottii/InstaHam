@@ -17,7 +17,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import ProfileForm from '../components/ProfileForm';
 import BackButton from '../components/BackButton';
-import {Link as RouterLink} from 'react-router-dom';
+// eslint-disable-next-line
 import {makeStyles} from '@material-ui/core/styles/makeStyles';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
@@ -35,51 +35,45 @@ const Profile = () => {
 
   return (
     <>
-      <BackButton />
+      <BackButton/>
       <Typography
         component="h1"
         variant="h2"
         gutterBottom>Profile</Typography>
-      {user !== null && avatar.length > 0 &&
-        <Card>
-          <CardMedia
-            component="img"
-            image={mediaUrl + avatar[0].filename}
-            alt="Avatar image"
-            title="Avatar image"
-          />
-          <CardContent>
-            <List>
-              <ListItem>
-                <ListItemIcon>
-                  <AccountBoxIcon />
-                </ListItemIcon>
-                <ListItemText primary={user.username} />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <EmailIcon />
-                </ListItemIcon>
-                <ListItemText primary={user.email} />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <PersonIcon />
-                </ListItemIcon>
-                <ListItemText primary={user.full_name} />
-              </ListItem>
-              <ListItem>
-                <Button
-                  color="inherit"
-                  component={RouterLink}
-                  to="/myfiles"
-                >
-                  My files
-                </Button>
-              </ListItem>
-            </List>
-          </CardContent>
-        </Card>
+      {user !== null &&
+      <Card>
+        {avatar.length > 0 &&
+        <CardMedia
+          component="img"
+          image={mediaUrl + avatar.pop().filename}
+          alt="Avatar image"
+          title="Avatar image"
+        />
+        }
+
+        <CardContent>
+          <List>
+            <ListItem>
+              <ListItemIcon>
+                <AccountBoxIcon />
+              </ListItemIcon>
+              <ListItemText primary={user.username} />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <EmailIcon />
+              </ListItemIcon>
+              <ListItemText primary={user.email} />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary={user.full_name} />
+            </ListItem>
+          </List>
+        </CardContent>
+      </Card>
       }
       <ProfileForm />
     </>

@@ -21,7 +21,6 @@ const RegisterForm = ({history}) => {
       history.push('/home');
     } catch (e) {
       console.log(e.message);
-      // TODO: näytä virhe
     }
   };
 

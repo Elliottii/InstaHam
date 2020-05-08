@@ -31,7 +31,6 @@ const Upload = ({history}) => {
         file: inputs.file,
       };
       const result = await upload(uploadObject, localStorage.getItem('token'));
-      console.log(result);
       setTimeout(() => {
         setLoading(false);
         history.push('/home');
@@ -75,7 +74,6 @@ const Upload = ({history}) => {
       }
     }
   }, [inputs.file, setInputs]);
-  console.log('inputs', inputs);
 
   return (
     <>

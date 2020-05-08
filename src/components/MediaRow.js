@@ -35,7 +35,7 @@ const MediaRow = ({file, myfiles}) => {
           {
             filter: `
                  brightness(${description.filters.brightness}%)
-                 contrast(${description.filters.contrast}%) 
+                 contrast(${description.filters.contrast}%)
                  saturate(${description.filters.saturation}%)
                  sepia(${description.filters.sepia}%)
                  `,
@@ -68,7 +68,7 @@ const MediaRow = ({file, myfiles}) => {
                 <IconButton
                   aria-label={`Delete file`}
                   onClick={() => {
-                    const delOK = window.confirm('Do you reallu want to delete?');
+                    const delOK = window.confirm('Do you really want to delete?');
                     if (delOK) {
                       deleteFile(file.file_id);
                     }

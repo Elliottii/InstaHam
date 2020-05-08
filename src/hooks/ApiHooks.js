@@ -11,7 +11,6 @@ const useAllMedia = () => {
       const response = await fetch(baseUrl + 'media/' + item.file_id);
       return await response.json();
     }));
-    console.log(items);
     setData(items);
   };
 
@@ -32,7 +31,6 @@ const useSingleMedia = (id) => {
         localStorage.getItem('token'));
       item.user = userResponse;
     }
-    console.log('itemi', item);
     setData(item);
   };
 
@@ -44,7 +42,6 @@ const useSingleMedia = (id) => {
 };
 
 const getAvatarImage = async (id) => {
-  console.log('ai', id);
   const response = await fetch(baseUrl + 'tags/avatar_' + id);
   return await response.json();
 };
@@ -230,6 +227,84 @@ const modifyFile = async (inputs, id) => {
   }
 };
 
+const useComments = (id) => {
+  const [data, setData] = useState([]);
+  const fetchUrl = async () => {
+    const response = await fetch(baseUrl + 'comments/file/' + id);
+    const json = await response.json();
+    setData(json);
+  };
+
+  useEffect(() => {
+    fetchUrl(id);
+  }, [id]);
+
+  return data;
+};
+
+const addComment = async (file_id, comment, token) => {
+
+  const data = {
+    "file_id":file_id,
+    "comment":comment,
+  };
+
+  const fetchOptions = {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': token,
+    },
+  };
+  try {
+    const commentResponse = await fetch(baseUrl + 'comments/', fetchOptions);
+    const commentJson = await commentResponse.json();
+    return commentJson;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const deleteComment = async (user_id) => {
+  const fetchOptions = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': localStorage.getItem('token'),
+    },
+  };
+  try {
+    const response = await fetch(baseUrl + 'comments/' + user_id, fetchOptions);
+    const json = await response.json();
+    if (!response.ok) throw new Error(json.message + ': ' + json.error);
+    return json;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const uploadAvatar = async (inputs, token, user_id) => {
+  const fd = new FormData();
+  fd.append('file', inputs.file);
+  const fetchOptions = {
+    method: 'POST',
+    body: fd,
+    headers: {
+      'x-access-token': token,
+    },
+  };
+  try {
+    const response = await fetch(baseUrl + 'media', fetchOptions);
+    const json = await response.json();
+    if (!response.ok) throw new Error(json.message + ': ' + json.error);
+    const tagJson = addTag(json.file_id, 'avatar_' + user_id, token);
+    return {json, tagJson};
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
 export {
   useAllMedia,
   useSingleMedia,
@@ -244,4 +319,8 @@ export {
   getUser,
   deleteFile,
   modifyFile,
+  useComments,
+  addComment,
+  deleteComment,
+  uploadAvatar,
 };

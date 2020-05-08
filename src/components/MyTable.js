@@ -33,7 +33,6 @@ const MyTable = () => {
   const matches = useMediaQuery('(min-width:697px)');
 
   const picArray = useAllMedia();
-  console.log(picArray);
   let newPicArray = [];
   if (picArray.length > 0 && user !== null) {
     newPicArray = picArray.filter((pic) => pic.user_id === user.user_id);

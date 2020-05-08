@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
+// eslint-disable-next-line
 import {upload, useSingleMedia, modifyFile} from '../hooks/ApiHooks';
 import {
   Button,
@@ -34,7 +35,6 @@ const Modify = ({history, match}) => {
         }),
       };
       const result = await modifyFile(modifyObject, match.params.id);
-      console.log(result);
       setTimeout(() => {
         setLoading(false);
         history.push('/myfiles');
@@ -71,11 +71,9 @@ const Modify = ({history, match}) => {
     })();
   }, [file, setInputs]);
 
-  console.log('inputs', inputs);
-
   return (
     <>
-      <BackButton />
+      <BackButton/>
       <Grid container>
         <Grid item xs={12}>
           <Typography
@@ -135,63 +133,63 @@ const Modify = ({history, match}) => {
             </Grid>
           </ValidatorForm>
           {loading &&
-            <Grid item>
-              <CircularProgress />
-            </Grid>
+          <Grid item>
+            <CircularProgress/>
+          </Grid>
           }
           {inputs.filename.length > 0 &&
-            <Grid item>
-              <img
-                style={
-                  {
-                    filter: `
+          <Grid item>
+            <img
+              style={
+                {
+                  filter: `
                  brightness(${inputs.brightness}%)
                  contrast(${inputs.contrast}%)
                  saturate(${inputs.saturation}%)
                  sepia(${inputs.sepia}%)
                  `,
-                    width: '100%',
-                  }
+                  width: '100%',
                 }
-                src={mediaUrl + inputs.filename}
-                alt="preview" />
-              <Typography>Brightness</Typography>
-              <Slider
-                name="brightness"
-                value={inputs.brightness}
-                min={0}
-                max={200}
-                step={1}
-                onChange={handleSliderChange}
-              />
-              <Typography>Contrast</Typography>
-              <Slider
-                name="contrast"
-                value={inputs.contrast}
-                min={0}
-                max={200}
-                step={1}
-                onChange={handleSliderChange}
-              />
-              <Typography>Saturation</Typography>
-              <Slider
-                name="saturation"
-                value={inputs.saturation}
-                min={0}
-                max={200}
-                step={1}
-                onChange={handleSliderChange}
-              />
-              <Typography>Sepia</Typography>
-              <Slider
-                name="sepia"
-                value={inputs.sepia}
-                min={0}
-                max={200}
-                step={1}
-                onChange={handleSliderChange}
-              />
-            </Grid>
+              }
+              src={mediaUrl + inputs.filename}
+              alt="preview"/>
+            <Typography>Brightness</Typography>
+            <Slider
+              name="brightness"
+              value={inputs.brightness}
+              min={0}
+              max={200}
+              step={1}
+              onChange={handleSliderChange}
+            />
+            <Typography>Contrast</Typography>
+            <Slider
+              name="contrast"
+              value={inputs.contrast}
+              min={0}
+              max={200}
+              step={1}
+              onChange={handleSliderChange}
+            />
+            <Typography>Saturation</Typography>
+            <Slider
+              name="saturation"
+              value={inputs.saturation}
+              min={0}
+              max={200}
+              step={1}
+              onChange={handleSliderChange}
+            />
+            <Typography>Sepia</Typography>
+            <Slider
+              name="sepia"
+              value={inputs.sepia}
+              min={0}
+              max={200}
+              step={1}
+              onChange={handleSliderChange}
+            />
+          </Grid>
           }
         </Grid>
       </Grid>

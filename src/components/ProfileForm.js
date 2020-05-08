@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {checkToken, checkUserAvailable, updateProfile} from '../hooks/ApiHooks';
+import {checkToken, checkUserAvailable, updateProfile, uploadAvatar} from '../hooks/ApiHooks';
 import {withRouter} from 'react-router-dom';
 import {MediaContext} from '../contexts/MediaContext';
 import {Button, Grid} from '@material-ui/core';
@@ -17,16 +17,19 @@ const ProfileForm = ({history}) => {
   const doProfile = async () => {
     try {
       const token = localStorage.getItem('token');
+      if (inputs.file !== undefined) {
+        await uploadAvatar(inputs, token, user.user_id);
+      }
       await updateProfile(inputs, token);
       const userdata = await checkToken(token);
-      console.log(userdata);
       setUser(userdata);
     } catch (e) {
-      console.log(e.message);
+      console.log("register form", e.message)
     }
   };
 
-  const {inputs, setInputs, handleInputChange, handleSubmit} =
+
+  const {inputs, setInputs, handleInputChange, handleSubmit, handleFileChange} =
     useProfileForm(doProfile);
 
   useEffect(() => {
@@ -53,7 +56,7 @@ const ProfileForm = ({history}) => {
       <Grid item>
         <Button
           fullWidth
-          color="black"
+          color="primary"
           onClick={showHide}
         >
           Update profile
@@ -127,9 +130,10 @@ const ProfileForm = ({history}) => {
                 <TextValidator
                   fullWidth
                   type="file"
-                  name="test"
-                  validators={['allowedExtensions:image/png,image/jpeg,image/jpg']}
+                  name="profileImage"
                   errorMessages={['images only']}
+                  accept="image/*"
+                  onChange={handleFileChange}
                 />
               </Grid>
 
