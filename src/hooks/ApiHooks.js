@@ -245,8 +245,8 @@ const useComments = (id) => {
 const addComment = async (file_id, comment, token) => {
 
   const data = {
-    "file_id":file_id,
-    "comment":comment,
+    'file_id': file_id,
+    'comment': comment,
   };
 
   const fetchOptions = {
@@ -258,15 +258,15 @@ const addComment = async (file_id, comment, token) => {
     },
   };
   try {
-    const commentResponse = await fetch(baseUrl + 'comments/', fetchOptions);
-    const commentJson = await commentResponse.json();
-    return commentJson;
+    const response = await fetch(baseUrl + 'comments/', fetchOptions);
+    const json = await response.json();
+    return json;
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const deleteComment = async (user_id) => {
+const deleteComment = async (id) => {
   const fetchOptions = {
     method: 'DELETE',
     headers: {
@@ -275,7 +275,7 @@ const deleteComment = async (user_id) => {
     },
   };
   try {
-    const response = await fetch(baseUrl + 'comments/' + user_id, fetchOptions);
+    const response = await fetch(baseUrl + 'comments/' + id, fetchOptions);
     const json = await response.json();
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
     return json;
@@ -305,6 +305,133 @@ const uploadAvatar = async (inputs, token, user_id) => {
   }
 };
 
+const useFavouritesMedia = () => {
+  const [data, setData] = useState([]);
+  const fetchOptions = {
+    headers: {
+      'x-access-token': localStorage.getItem('token'),
+    },
+  };
+  const fetchUrl = async () => {
+    const response = await fetch(baseUrl + 'favourites/', fetchOptions);
+    const json = await response.json();
+    const items = await Promise.all(json.map(async (item) => {
+      const response = await fetch(baseUrl + 'media/' + item.file_id);
+      return await response.json();
+    }));
+    setData(items);
+  };
+
+  useEffect(() => {
+    fetchUrl();
+  }, []);
+
+  return data;
+};
+
+const addFavouritesMedia = async (file_id, token) => {
+
+  const fetchOptions = {
+    method: 'POST',
+    body: JSON.stringify({
+      'file_id': file_id,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': token,
+    },
+  };
+  try {
+    const response = await fetch(baseUrl + 'favourites/', fetchOptions);
+    const json = await response.json();
+    return json;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const deleteFavouritesMedia = async (file_id, token) => {
+  const fetchOptions = {
+    method: 'DELETE',
+    body: JSON.stringify({
+      'file_id': file_id,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': localStorage.getItem('token'),
+    },
+  };
+  try {
+    const response = await fetch(baseUrl + 'favourites/file/' + file_id,
+      fetchOptions);
+    const json = await response.json();
+    if (!response.ok) throw new Error(json.message + ': ' + json.error);
+    return json;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const useLike = (id) => {
+  const [data, setData] = useState(null);
+  const fetchUrl = async (fileid) => {
+    const response = await fetch(baseUrl + 'ratings/file/' + fileid);
+    const item = await response.json();
+    setData(item);
+    console.log('LIKES:', item);
+  };
+
+  useEffect(() => {
+    fetchUrl(id);
+  }, [id]);
+
+  return data;
+};
+
+const addLike = async (file_id, rating, token) => {
+
+  const fetchOptions = {
+    method: 'POST',
+    body: JSON.stringify({
+      'file_id': file_id,
+      'rating': rating,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': token,
+    },
+  };
+  try {
+    const response = await fetch(baseUrl + 'ratings/', fetchOptions);
+    const json = await response.json();
+    return json;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const deleteLike = async (file_id, token) => {
+  const fetchOptions = {
+    method: 'DELETE',
+    body: JSON.stringify({
+      'file_id': file_id,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': localStorage.getItem('token'),
+    },
+  };
+  try {
+    const response = await fetch(baseUrl + 'ratings/file/' + file_id,
+      fetchOptions);
+    const json = await response.json();
+    if (!response.ok) throw new Error(json.message + ': ' + json.error);
+    return json;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
 export {
   useAllMedia,
   useSingleMedia,
@@ -323,4 +450,10 @@ export {
   addComment,
   deleteComment,
   uploadAvatar,
+  useFavouritesMedia,
+  addFavouritesMedia,
+  deleteFavouritesMedia,
+  useLike,
+  addLike,
+  deleteLike,
 };

@@ -23,6 +23,7 @@ import VPNKeyIcon from '@material-ui/icons/VpnKey';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import UploadIcon from '@material-ui/icons/NoteAdd';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
+import StarsIcon from '@material-ui/icons/Stars';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -188,6 +189,19 @@ const Nav = ({history}) => {
               </ListItemIcon>
               <ListItemText primary="My files"/>
             </ListItem>
+
+            <ListItem
+              button
+              component={RouterLink}
+              onClick={toggleDrawer(false)}
+              to="/myfavourites"
+            >
+              <ListItemIcon>
+                <StarsIcon/>
+              </ListItemIcon>
+              <ListItemText primary="Favourites"/>
+            </ListItem>
+
             <ListItem
               button
               component={RouterLink}

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
+  deleteLike, useLike,
   useSingleMedia,
 } from '../hooks/ApiHooks';
 import {
@@ -9,8 +10,9 @@ import {
 } from '@material-ui/core';
 import BackButton from '../components/BackButton';
 import Media from '../components/Media';
-import CommentsForm from '../components/CommentsForm';
 import Comments from './Comments';
+import FavouriteButton from '../components/FavouriteButton';
+import LikeButton from '../components/LikeButton';
 
 
 const Single = ({match}) => {
@@ -19,7 +21,6 @@ const Single = ({match}) => {
   if (file !== null) {
     description = (JSON.parse(file.description));
   }
-
   return (
     <>
       {file !== null &&
@@ -39,6 +40,8 @@ const Single = ({match}) => {
           {description &&
           <Media file={file} description={description}/>
           }
+          <FavouriteButton/>
+          <LikeButton/>
         </Paper>
         <Typography
           component="p"
@@ -49,7 +52,6 @@ const Single = ({match}) => {
       </>
       }
       <Comments match={match}/>
-      <CommentsForm/>
     </>
   );
 };

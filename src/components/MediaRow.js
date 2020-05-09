@@ -88,6 +88,7 @@ const MediaRow = ({file, myfiles}) => {
 MediaRow.propTypes = {
   file: PropTypes.object,
   myfiles: PropTypes.bool,
+  myfavourites: PropTypes.bool,
 };
 
 export default MediaRow;

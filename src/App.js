@@ -12,6 +12,7 @@ import {Container} from '@material-ui/core';
 import Upload from './views/Upload';
 import MyFiles from './views/MyFiles';
 import Modify from './views/Modify';
+import Favourites from './views/Favourites';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
               <Route path="/logout" component={Logout} />
               <Route path="/upload" component={Upload} />
               <Route path="/myfiles" component={MyFiles} />
+              <Route path="/myfavourites" component={Favourites} />
               <Route path="/modify/:id" component={Modify} />
             </Switch>
           </main>

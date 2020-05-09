@@ -117,19 +117,6 @@ const Modify = ({history, match}) => {
                   errorMessages={['text only']}
                 />
               </Grid>
-              <Grid container item>
-                <Button
-                  style={{
-                    backgroundColor: 'black',
-                  }}
-                  fullWidth
-                  color="primary"
-                  type="submit"
-                  variant="contained"
-                >
-                  Save
-                </Button>
-              </Grid>
             </Grid>
           </ValidatorForm>
           {loading &&
@@ -191,6 +178,19 @@ const Modify = ({history, match}) => {
             />
           </Grid>
           }
+          <Grid container item>
+            <Button
+              style={{
+                backgroundColor: 'black',
+              }}
+              fullWidth
+              color="primary"
+              type="submit"
+              variant="contained"
+            >
+              Save
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     </>

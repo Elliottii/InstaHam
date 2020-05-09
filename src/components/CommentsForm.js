@@ -5,6 +5,7 @@ import React from 'react';
 import {withRouter} from 'react-router-dom';
 import useCommentsForm from '../hooks/CommentsHooks';
 import {addComment} from '../hooks/ApiHooks';
+import TextField from '@material-ui/core/TextField';
 
 const CommentsForm = ({match}) => {
   const doComment = async () => {
@@ -22,19 +23,21 @@ const CommentsForm = ({match}) => {
 
 
   return (
+    <ValidatorForm
+      onSubmit={handleSubmit}
+      instantValidate={false}
+      noValidate
+    >
     <Grid container>
       <Grid item>
-        <ValidatorForm
-          onSubmit={handleSubmit}
-          instantValidate={false}
-          noValidate
-        >
+
           <Grid container>
             <Grid container item>
-              <TextValidator
+              <TextField
                 fullWidth
                 type="text"
                 name="comment"
+                multiline
                 label="Leave comment"
                 onChange={handleInputChange}
                 value={inputs.comment}
@@ -57,13 +60,14 @@ const CommentsForm = ({match}) => {
               </Button>
             </Grid>
           </Grid>
-        </ValidatorForm>
       </Grid>
     </Grid>
+    </ValidatorForm>
   );
 };
 
 CommentsForm.propTypes = {
   match: PropTypes.object,
 };
+
 export default withRouter(CommentsForm);

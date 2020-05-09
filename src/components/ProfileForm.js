@@ -24,7 +24,7 @@ const ProfileForm = ({history}) => {
       const userdata = await checkToken(token);
       setUser(userdata);
     } catch (e) {
-      console.log("register form", e.message)
+      console.log(e.message)
     }
   };
 
