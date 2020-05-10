@@ -24,7 +24,6 @@ const Comments = ({match}) => {
     <>
       {
         commentList.map((comment) =>
-
           <Paper>
             <List>
               <ListItem >

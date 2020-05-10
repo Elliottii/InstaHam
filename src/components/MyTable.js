@@ -45,9 +45,6 @@ const MyTable = () => {
           cellHeight={180}
           className={classes.gridList}
           cols={matches ? 3 : 2}>
-          <GridListTile key="Subheader" cols={3} style={{height: 'auto'}}>
-            <ListSubheader component="div">All Media</ListSubheader>
-          </GridListTile>
           {
             newPicArray.map((file) =>
               <GridListTile key={file.file_id}>

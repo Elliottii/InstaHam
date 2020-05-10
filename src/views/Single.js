@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  deleteLike, useLike,
   useSingleMedia,
 } from '../hooks/ApiHooks';
 import {
@@ -13,7 +12,6 @@ import Media from '../components/Media';
 import Comments from './Comments';
 import FavouriteButton from '../components/FavouriteButton';
 import LikeButton from '../components/LikeButton';
-
 
 const Single = ({match}) => {
   const file = useSingleMedia(match.params.id);

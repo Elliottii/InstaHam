@@ -4,7 +4,6 @@ import {useFavouritesMedia} from '../hooks/ApiHooks';
 import {
   GridList,
   GridListTile,
-  ListSubheader,
   makeStyles,
   useMediaQuery,
 } from '@material-ui/core';

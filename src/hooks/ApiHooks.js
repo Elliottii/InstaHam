@@ -329,6 +329,21 @@ const useFavouritesMedia = () => {
   return data;
 };
 
+const useSingleFavourites = (id) => {
+  const [data, setData] = useState([]);
+  const fetchUrl = async (fileid) => {
+    const response = await fetch(baseUrl + 'favourites/file/' + fileid);
+    const item = await response.json();
+    setData(item);
+  };
+
+  useEffect(() => {
+    fetchUrl(id);
+  }, [id]);
+
+  return data;
+};
+
 const addFavouritesMedia = async (file_id, token) => {
 
   const fetchOptions = {
@@ -373,12 +388,11 @@ const deleteFavouritesMedia = async (file_id, token) => {
 };
 
 const useLike = (id) => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const fetchUrl = async (fileid) => {
     const response = await fetch(baseUrl + 'ratings/file/' + fileid);
     const item = await response.json();
     setData(item);
-    console.log('LIKES:', item);
   };
 
   useEffect(() => {
@@ -451,6 +465,7 @@ export {
   deleteComment,
   uploadAvatar,
   useFavouritesMedia,
+  useSingleFavourites,
   addFavouritesMedia,
   deleteFavouritesMedia,
   useLike,
