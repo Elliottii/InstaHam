@@ -30,7 +30,6 @@ const LikeButton = ({match}) => {
         onClick={() => {
           {
             addLike(match.params.id, 1, localStorage.getItem('token'));
-            window.location.reload();
           }
         }}
       >
@@ -46,7 +45,6 @@ const LikeButton = ({match}) => {
         onClick={() => {
           {
             deleteLike(match.params.id, localStorage.getItem('token'));
-            window.location.reload();
           }
         }}
       >

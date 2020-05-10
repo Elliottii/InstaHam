@@ -29,7 +29,6 @@ const FavouriteButton = ({match}) => {
         }
         onClick={() => {
           addFavouritesMedia(match.params.id, localStorage.getItem('token'));
-          window.location.reload(false)
         }
         }
       >
@@ -44,7 +43,6 @@ const FavouriteButton = ({match}) => {
         }
         onClick={() => {
           deleteFavouritesMedia(match.params.id, localStorage.getItem('token'));
-          window.location.reload(false)
         }
         }
       >
