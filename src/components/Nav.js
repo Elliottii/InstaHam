@@ -24,8 +24,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import UploadIcon from '@material-ui/icons/NoteAdd';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
 import StarsIcon from '@material-ui/icons/Stars';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
 
 
 const useStyles = makeStyles((theme) => ({

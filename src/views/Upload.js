@@ -30,6 +30,7 @@ const Upload = ({history}) => {
         }),
         file: inputs.file,
       };
+      // eslint-disable-next-line
       const result = await upload(uploadObject, localStorage.getItem('token'));
       setTimeout(() => {
         setLoading(false);

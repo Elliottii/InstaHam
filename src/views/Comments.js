@@ -8,25 +8,22 @@ import {
   ListItem,
   ListItemText,
   Paper,
-  Typography,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import React, {useContext, useState} from 'react';
-import {MediaContext} from '../contexts/MediaContext';
+import React, {useContext} from 'react';
 import CommentsForm from '../components/CommentsForm';
-
+import {MediaContext} from '../contexts/MediaContext';
 
 const Comments = ({match}) => {
   const [user] = useContext(MediaContext);
   const commentList = useComments(match.params.id);
-
   return (
     <>
       {
         commentList.map((comment) =>
           <Paper>
             <List>
-              <ListItem >
+              <ListItem>
                 <ListItemText
                   primary={comment.comment}
                   secondary={comment.time_added}
@@ -39,7 +36,7 @@ const Comments = ({match}) => {
                         'Do you really want to delete?');
                       if (delOK) {
                         deleteComment(comment.comment_id);
-                        window.location.reload()
+                        window.location.reload();
                       }
                     } else {
                       window.alert('You can only delete own comments');

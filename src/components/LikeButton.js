@@ -1,11 +1,11 @@
 import {Button} from '@material-ui/core';
 import LikeIcon from '@material-ui/icons/Favorite';
 import UnlikeIcon from '@material-ui/icons/FavoriteBorder';
-import React, {Component as component, useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import {
   addLike,
-  deleteLike, useLike, useSingleMedia,
+  deleteLike, useLike,
 } from '../hooks/ApiHooks';
 import {withRouter} from 'react-router-dom';
 import {MediaContext} from '../contexts/MediaContext';
@@ -28,6 +28,7 @@ const LikeButton = ({match}) => {
           <UnlikeIcon/>
         }
         onClick={() => {
+          // eslint-disable-next-line
           {
             addLike(match.params.id, 1, localStorage.getItem('token'));
             window.location.reload()
@@ -44,6 +45,7 @@ const LikeButton = ({match}) => {
           <LikeIcon/>
         }
         onClick={() => {
+          // eslint-disable-next-line
           {
             deleteLike(match.params.id, localStorage.getItem('token'));
             window.location.reload()

@@ -1,5 +1,5 @@
 import {Button, Grid} from '@material-ui/core';
-import {TextValidator, ValidatorForm} from 'react-material-ui-form-validator';
+import {ValidatorForm} from 'react-material-ui-form-validator';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {withRouter} from 'react-router-dom';

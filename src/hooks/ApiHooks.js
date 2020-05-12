@@ -237,6 +237,7 @@ const useComments = (id) => {
 
   useEffect(() => {
     fetchUrl(id);
+    // eslint-disable-next-line
   }, [id]);
 
   return data;
@@ -324,6 +325,7 @@ const useFavouritesMedia = () => {
 
   useEffect(() => {
     fetchUrl();
+    // eslint-disable-next-line
   }, []);
 
   return data;

@@ -9,7 +9,6 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
-  Button,
 } from '@material-ui/core';
 import {getAvatarImage} from '../hooks/ApiHooks';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';

@@ -34,6 +34,7 @@ const Modify = ({history, match}) => {
           },
         }),
       };
+      // eslint-disable-next-line
       const result = await modifyFile(modifyObject, match.params.id);
       setTimeout(() => {
         setLoading(false);

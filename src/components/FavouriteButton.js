@@ -5,7 +5,7 @@ import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import {
   addFavouritesMedia,
-  deleteFavouritesMedia, useFavouritesMedia, useSingleFavourites,
+  deleteFavouritesMedia, useSingleFavourites,
 } from '../hooks/ApiHooks';
 import {withRouter} from 'react-router-dom';
 import {MediaContext} from '../contexts/MediaContext';
