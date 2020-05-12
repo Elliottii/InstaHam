@@ -5,7 +5,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ### `npm start`
-### FOR SOME REASON RELOADING PAGE CAUSES "URL NOT FOUND"
 Open [users.metropolia.fi](http://users.metropolia.fi/~eelik/instaham) to view it in the browser.
 
 The page will reload if you make edits.<br />
