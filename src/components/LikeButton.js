@@ -1,7 +1,7 @@
 import {Button} from '@material-ui/core';
 import LikeIcon from '@material-ui/icons/Favorite';
 import UnlikeIcon from '@material-ui/icons/FavoriteBorder';
-import React, {useContext, useState} from 'react';
+import React, {Component as component, useContext, useState} from 'react';
 import PropTypes from 'prop-types';
 import {
   addLike,
@@ -30,6 +30,7 @@ const LikeButton = ({match}) => {
         onClick={() => {
           {
             addLike(match.params.id, 1, localStorage.getItem('token'));
+            window.location.reload()
           }
         }}
       >
@@ -45,6 +46,7 @@ const LikeButton = ({match}) => {
         onClick={() => {
           {
             deleteLike(match.params.id, localStorage.getItem('token'));
+            window.location.reload()
           }
         }}
       >

@@ -39,6 +39,7 @@ const Comments = ({match}) => {
                         'Do you really want to delete?');
                       if (delOK) {
                         deleteComment(comment.comment_id);
+                        window.location.reload()
                       }
                     } else {
                       window.alert('You can only delete own comments');
